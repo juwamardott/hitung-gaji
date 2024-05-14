@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hitung Gaji</title>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      function hitungGaji() {
+        // Disini saya menggunakan variabel let karena isi dari variabel tersebut akan berubah ubah
+        // Menggunakan tipe var pada javascript tidak relevan lagi, karena ada kemungkinan kita bisa menggunakan variabel padahal belum di deklarasikan
+
+        // Ambil Value Jabatan Dari Inputan User
+        let jabatan = document.getElementById("jabatan").value;
+        let gaji;
+
+        // Lalu lakukan Penyocokan sesuai dengan jabatan
+        switch (jabatan) {
+          case "Direktur":
+            gaji = 3000000;
+            break;
+          case "Manager":
+            gaji = 2000000;
+            break;
+          case "Karyawan":
+            gaji = 1000000;
+            break;
+          case "PekerjaLain":
+            gaji = 800000;
+            break;
+          default:
+            // Nilai Default jika user tidak memilih jabatan tapi melakukan submit
+            alert("Mohon Pilih Jabatan Terlebih Dahulu");
+            return;
+        }
+
+        // Membuat Variabel Tunjangan yang berisi nilai gaji * 10%, 0.1 jika bernilai float
+        let tunjangan = gaji * 0.1;
+        // Membuat Variabel PPN dengan nilai gaji * 20%, 0.2 jika bernilai float
+        let ppn = gaji * 0.2;
+        // Membuat variabel total sebagai hasil akhir yang berisi nilai gaji + tunjangan - PPN
+        let total = gaji + tunjangan - ppn;
+
+        document.getElementById("hasil").innerText =
+          "Gaji bersih: Rp" +
+          gaji +
+          "\n" +
+          "Tunjangan: Rp" +
+          tunjangan +
+          "\n" +
+          "PPn: Rp" +
+          ppn +
+          "\n" +
+          "Total gaji yang diterima: Rp" +
+          total;
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Hitung Gaji</h1>
+      <form onsubmit="hitungGaji(); return false;">
+        <label for="jabatan">Jabatan:</label>
+        <select id="jabatan" name="jabatan" required>
+          <option value="">Pilih jabatan</option>
+          <option value="Direktur">Direktur</option>
+          <option value="Manager">Manager</option>
+          <option value="Karyawan">Karyawan</option>
+          <option value="PekerjaLain">Pekerja Lain</option>
+        </select>
+
+        <button type="submit">Hitung</button>
+      </form>
+      <div id="hasil" class="hasil"></div>
+    </div>
+  </body>
+</html>
